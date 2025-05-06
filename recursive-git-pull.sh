@@ -1,14 +1,15 @@
 #!/bin/bash
 
+
 if [[ $# -eq 0 ]]; then
   #echo "Uso: $0 $@ ...]"
   #exit 1
-  diretorio_corrente=$(pwd)/
+  diretorio_corrente=$(echo $(pwd) | sed 's|/$||')/*/
 else
-  diretorio_corrente=$1
+  diretorio_corrente=$(echo "$1" | sed 's|/$||')
 fi
 
-for nome in $diretorio_corrente*/; do
+for nome in $diretorio_corrente; do
   if [[ -d "$nome/.git" ]]; then
     cd "$nome" || exit
     #git status | grep -q "working tree clean"
