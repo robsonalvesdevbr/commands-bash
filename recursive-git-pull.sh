@@ -8,7 +8,11 @@ for nome in */; do
     echo -e "\e[01;33mVerificando $nome.\e[00m"
     if git status | grep -q "working tree clean"; then
       git pull
-      echo -e "\e[00;32mO comando 'git status' teve sucesso em $nome.\e[00m\n\n"
+      if git pull | grep -q  "Already up to date."; then
+          echo -e "\e[00;32mO comando 'git pull' teve sucesso em $nome.\e[00m\n\n"
+      else
+          echo -e "\e[00;32mO comando 'git pull' teve sucesso em $nome, mas não está atualizado.\e[00m\n\n"
+      fi
     else
       echo -e "\e[00;31mO comando 'git status' falhou em $nome. Nenhuma ação adicional será tomada.\e[00m\n\n"
     fi
