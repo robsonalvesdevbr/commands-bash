@@ -1,6 +1,14 @@
 #!/bin/bash
 
-for nome in */; do
+if [[ $# -eq 0 ]]; then
+  #echo "Uso: $0 $@ ...]"
+  #exit 1
+  diretorio_corrente=$(pwd)/
+else
+  diretorio_corrente=$1
+fi
+
+for nome in $diretorio_corrente*/; do
   if [[ -d "$nome/.git" ]]; then
     cd "$nome" || exit
     #git status | grep -q "working tree clean"
